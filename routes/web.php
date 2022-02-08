@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [App\Http\Controllers\IndexController::class, 'index'])->name('homepage');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/cart', [App\Http\Controllers\CartController::class, 'shoppingCart'])->name('cart');
+Route::post('/cart-add', [App\Http\Controllers\CartController::class, 'add'])->name('cart-add');
+Route::post('/cart-update', [App\Http\Controllers\CartController::class, 'update'])->name('cart-update');
+Route::post('/cart-delete', [App\Http\Controllers\CartController::class, 'delete'])->name('cart-item-delete');
