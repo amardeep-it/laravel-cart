@@ -229,7 +229,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'CartHelper' => App\Helpers\CartHelper::class,
         'ProductHelper' => App\Helpers\ProductHelper::class,
         'DealsHelper' => App\Helpers\DealsHelper::class,
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,

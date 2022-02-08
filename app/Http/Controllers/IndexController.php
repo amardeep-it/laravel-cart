@@ -9,6 +9,6 @@ class IndexController extends Controller
 {
     public function index()
     {
-        return view('welcome', ["test" => "testvalue"]);
+        return view('products-list', ["test" => "testvalue"]);
     }
 }

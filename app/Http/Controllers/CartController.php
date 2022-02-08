@@ -5,32 +5,32 @@ namespace App\Http\Controllers;
 
 use App\Helpers\DealsHelper;
 use App\Helpers\ProductHelper;
+use Cart;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Gloudemans\Shoppingcart\Cart;
-use Illuminate\Session\SessionManager;
 
 class CartController extends Controller
 {
-    public function add(Request $request)
+    public function add(Request $request): RedirectResponse
     {
         $product = ProductHelper::getProduct($sku = $request->input('sku'));
         if (empty($product)) {
             return redirect()->route('homepage')->withErrors('Product could not be added to the Cart.');
         }
-        $cartItem = \Cart::add(
+        $cartItem = Cart::add(
             $sku,
             $product['name'],
             $request->input('selectQty'),
             $product['price']
         );
-        \Cart::setTax($cartItem->rowId, $product['tax']);
+        Cart::setTax($cartItem->rowId, $product['tax']);
         DealsHelper::applyDeal($cartItem);
         return redirect()->route('homepage')->withSuccess('Product has been successfully added to the Cart.');
     }
 
-    public function update(Request $request)
+    public function update(Request $request): RedirectResponse
     {
-        $cartItem = \Cart::update(
+        $cartItem = Cart::update(
             $request->input('id'),
             $request->input('selectQty')
         );
@@ -38,9 +38,9 @@ class CartController extends Controller
         return redirect()->route('cart')->withSuccess('Product has been successfully updated in the Cart.');
     }
 
-    public function delete(Request $request)
+    public function delete(Request $request): RedirectResponse
     {
-        \Cart::remove($request->input('id'));
+        Cart::remove($request->input('id'));
         return redirect()->route('cart')->withSuccess('Product has been successfully updated in the Cart.');
     }
 
