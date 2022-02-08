@@ -5,6 +5,11 @@ namespace App\Helpers;
 
 class ProductHelper
 {
+    /**
+     * Temporary declaration of products list
+     * @var array
+    */
+    //TODO: Replace with products list from SOLR or DB
     private const PRODUCT_LIST = [
         'plants0001' => [
             'id' => 1,
@@ -48,11 +53,20 @@ class ProductHelper
         ],
     ];
 
+    /**
+     * Get list of ALL products
+     * @return array
+    */
     public static function getProducts(): array
     {
         return self::PRODUCT_LIST;
     }
 
+    /**
+     * Get Details of product required on Shopping Cart page with particular SKU
+     * @param string $sku
+     * @return array
+     */
     public static function getProduct(string $sku): array
     {
         if (array_key_exists($sku,self::PRODUCT_LIST)) {
@@ -66,6 +80,11 @@ class ProductHelper
         return [];
     }
 
+    /**
+     * Get ALL Details of product with particular SKU
+     * @param string $sku
+     * @return array
+     */
     public static function getProductDetails(string $sku): array
     {
         if (array_key_exists($sku,self::PRODUCT_LIST)) {
