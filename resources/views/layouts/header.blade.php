@@ -26,7 +26,7 @@
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ route('cart') }}">Shopping Cart  <span class="badge">{!! \Cart::content()->count(); !!}</span></a></li>
+                <li><a href="{{ route('cart') }}">Shopping Cart  <span class="badge">{!! Cart::content()->count(); !!}</span></a></li>
                 <!-- Authentication Links -->
                 @guest
                     @if (Route::has('login'))

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\DealsHelper;
 use App\Helpers\ProductHelper;
+use Auth;
 use Cart;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -25,6 +26,10 @@ class CartController extends Controller
         );
         Cart::setTax($cartItem->rowId, $product['tax']);
         DealsHelper::applyDeal($cartItem);
+
+        //Save Cart to DB
+        $this->save();
+
         return redirect()->route('homepage')->withSuccess('Product has been successfully added to the Cart.');
     }
 
@@ -35,6 +40,10 @@ class CartController extends Controller
             $request->input('selectQty')
         );
         DealsHelper::applyDeal($cartItem);
+
+        //Save Cart to DB
+        $this->save();
+
         return redirect()->route('cart')->withSuccess('Product has been successfully updated in the Cart.');
     }
 
@@ -47,5 +56,14 @@ class CartController extends Controller
     public function shoppingCart()
     {
         return view('cart');
+    }
+
+    private function save()
+    {
+        if (Auth::user()) {
+            die('logged in');
+        } else {
+            die('logged out');
+        }
     }
 }

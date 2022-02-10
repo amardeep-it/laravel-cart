@@ -1,6 +1,16 @@
 @extends('layouts.layout')
 @section('content')
     <h1>Products</h1>
+    @if($errors->any())
+        <div class="alert alert-danger" role="alert">
+            {{ implode('', $errors->all(':message')) }}
+        </div>
+    @endif
+    @if(session('success'))
+        <div class="alert alert-success" role="alert">
+            {{session('success')}}
+        </div>
+    @endif
     @foreach(ProductHelper::getProducts() as $sku => $product)
         <div class="container product-container">
             <div class="col-sm-3 product-image">
