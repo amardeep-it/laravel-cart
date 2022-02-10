@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Cart;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -52,6 +53,7 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user): void
     {
+        // TODO: Restore Cart from DB. Also, merge Session cart if not empty.
         print_r(auth()->user()->email);
         die('authenticated');
     }
@@ -64,7 +66,7 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
-        \Cart::store(auth()->user()->email);
+        Cart::store(auth()->user()->email);
         return AuthenticatesUsersLogout();
     }
 }

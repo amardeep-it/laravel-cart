@@ -60,6 +60,7 @@ class CartController extends Controller
 
     private function save()
     {
+        // TODO: Add functionality to save cart to DB for logged-in User and Guest
         if (Auth::user()) {
             die('logged in');
         } else {
